@@ -1,18 +1,11 @@
 defmodule Hjlog do
-  @moduledoc """
-  Documentation for Hjlog.
-  """
+  use Application
 
-  @doc """
-  Hello world.
+  def start(_type, _args) do
+    IO.puts """
+    Starting application: \x1b[33mhttp://0.0.0.0:4000\x1b[0m\
+    """
 
-  ## Examples
-
-      iex> Hjlog.hello
-      :world
-
-  """
-  def hello do
-    :world
+    Plug.Adapters.Cowboy.http(Hjlog.Router, [])
   end
 end
