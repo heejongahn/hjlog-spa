@@ -1,11 +1,19 @@
+defmodule Hjlog.StaticServer do
+  defmacro __using__(_opts) do
+    quote do
+      plug Plug.Static,
+        at: "/static/",
+        from: Path.expand("./static")
+    end
+  end
+end
+
 defmodule Hjlog.Router do
   use Plug.Router
 
   plug Plug.Logger
 
-  plug Plug.Static,
-    at: "/static/",
-    from: Path.expand("./static")
+  use Hjlog.StaticServer
 
   plug :match
   plug :dispatch
