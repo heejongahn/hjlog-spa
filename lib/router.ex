@@ -9,6 +9,9 @@ defmodule Hjlog.StaticServer do
 end
 
 defmodule Hjlog.Router do
+  import Ecto.Query, only: [from: 2]
+  alias Hjlog.{Repo,User}
+
   use Plug.Router
 
   plug Plug.Logger
@@ -20,6 +23,14 @@ defmodule Hjlog.Router do
 
   get "/" do
     send_file(conn, 200, Path.expand("./index.html"))
+  end
+
+  get "/users" do
+    query = from u in User,
+        select: u.username
+
+    result = Repo.all(query)
+    send_resp(conn, 200, result)
   end
 
   match _ do

@@ -16,7 +16,7 @@ defmodule Hjlog.Mixfile do
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
     [mod: {Hjlog, []},
-     applications: [:cowboy, :plug],
+     applications: [:cowboy, :plug, :ecto, :postgrex],
      extra_applications: [:logger]]
   end
 
@@ -31,6 +31,8 @@ defmodule Hjlog.Mixfile do
   # Type "mix help deps" for more examples and options
   def deps do
     [{:cowboy, "~> 1.0.0"},
-     {:plug, "~> 1.0"}]
+     {:plug, "~> 1.0"},
+     {:ecto, "~> 1.0"},
+     {:postgrex, ">= 0.0.0"}]
   end
 end
